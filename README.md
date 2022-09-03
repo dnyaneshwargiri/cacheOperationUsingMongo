@@ -13,3 +13,6 @@ POSTMAN collection is placed in repo.
  MongoDB instance used details in app.js
  
  
+About overwrite policy-
+This is effiecient to do with Capped Collections in MongoDB at db server.
+ 
