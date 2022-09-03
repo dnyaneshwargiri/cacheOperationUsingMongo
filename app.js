@@ -1,7 +1,9 @@
 const express = require('express')
 const mongoose = require('mongoose')
 //this is mongodb my free cloud hosted instance 
-const url = 'mongodb+srv://test:test@cluster0.msur3yq.mongodb.net/?retryWrites=true&w=majority'
+//const url = 'mongodb+srv://test:test@cluster0.msur3yq.mongodb.net/?retryWrites=true&w=majority'
+const MONGODB_URI=  require("./env.config");
+const url = MONGODB_URI
 
 const app = express()
 
