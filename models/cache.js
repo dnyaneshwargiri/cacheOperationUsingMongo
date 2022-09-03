@@ -15,6 +15,10 @@ const cacheSchema = new mongoose.Schema({
     }
 
 })
+
+//code for capped collection- need to add in new Schema above after deleting curret object
+//
+//{capped:{size: 5120, max: 1000,autoIndexId: true}}
 //cusotm middleware function for TTL
 
 //due to some mongoose bug pre middleware is stucking implmented this solution using custom code in routes/route.js
