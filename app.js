@@ -1,9 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
-//this is mongodb my free cloud hosted 
+//this is mongodb my free cloud hosted instance 
 const url = 'mongodb+srv://test:test@cluster0.msur3yq.mongodb.net/?retryWrites=true&w=majority'
-
-instance 
 
 const app = express()
 

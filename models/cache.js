@@ -9,8 +9,17 @@ const cacheSchema = new mongoose.Schema({
     data: {
         type: String,
         required: true
+    },
+    timeToLive:{
+        type: Date           
     }
 
 })
+//cusotm middleware function for TTL
+cacheSchema.pre.save=function(doc,next) {
+    this.timeToLive=Date.now()
+    console.log()
+    next();
+}
 
 module.exports = mongoose.model('Cache',cacheSchema)

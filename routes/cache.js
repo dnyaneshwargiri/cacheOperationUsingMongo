@@ -63,8 +63,7 @@ router.post('/upsert', async(req,res) => {
             if (err)  res.send(500, {error: err});
             res.send({message:'Cache succesfully saved.'});
         });    
-})
-    
+})  
 //remove single cache
 router.delete('/deleteByKey/:key', async(req,res) => {
     try{
