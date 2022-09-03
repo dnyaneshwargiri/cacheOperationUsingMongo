@@ -7,6 +7,9 @@ How to Run-
  i. DEV start using nodemon= npm run start \n
  ii. PROD start using node js= npm run prodStart
  
+How to test-
+POSTMAN collection is placed in repo.
+ 
  MongoDB instance used details in app.js
  
  
