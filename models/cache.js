@@ -16,10 +16,11 @@ const cacheSchema = new mongoose.Schema({
 
 })
 //cusotm middleware function for TTL
-cacheSchema.pre.save=function(doc,next) {
-    this.timeToLive=Date.now()
-    console.log()
-    next();
-}
+
+//due to some mongoose bug pre middleware is stucking implmented this solution using custom code in routes/route.js
+// cacheSchema.pre('findOneAndUpdate',true, async function(next) {
+//     this.timeToLive=Date.now()
+//     next();
+// })
 
 module.exports = mongoose.model('Cache',cacheSchema)

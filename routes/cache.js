@@ -25,8 +25,37 @@ router.get('/:key', async(req,res) => {
     try{
            const cache = await Cache.find({key:req.params.key})
            if(cache.length>0) {
-            res.json(cache)
-            console.log("Cache hit\n")    
+            let currentTime=Date.now()
+            let cacheTTL=Date.parse(cache[0]._doc.timeToLive)
+            console.log("Cache TTL- ",cacheTTL ) 
+            console.log("Current TTL- ",currentTime) 
+            //console.log( cacheTTL < currentTime)           
+            //if cache is live
+            if(cacheTTL < currentTime)
+            {
+                res.json(cache)
+                console.log("Cache hit\n") 
+            }
+            else //if cache is not live
+            {
+                console.log("Cache expired\n")  
+                //create new entry with random string
+                let rs=makeRandomString(5)
+                //update TTL
+                let update={ key: req.params.key, data: rs,
+                    timeToLive: new Date(new Date().getTime() + 5*60000) 
+                    //now+ 5 mins is expiry time
+                }   
+                let query={key:req.params.key}        
+                try{
+                    Cache.findOneAndUpdate(query,update, {upsert: true,useFindAndModify:false}, function(err, doc) {
+                        if (err)  res.send(500, {error: err});
+                        res.json(cache)
+                    });                                      
+                }catch(err){
+                    res.send(`Error:${err}`)
+                } 
+            }               
            }
            else {
             //if no cache present create random string
@@ -55,11 +84,15 @@ router.post('/upsert', async(req,res) => {
     //check if cache exist then for logging purpose
     const tempCache = await Cache.find({key:req.body.key})
     let cacheExist =tempCache.length >0 ?true:false;
-    update={data:req.body.data}
+    timeToLive= new Date(new Date().getTime() + 5*60000); //now+ 5 mins is expiry time
+    console.log("current time= ",new Date())
+    console.log("expiry time of cache is 5 mins + current time= ",timeToLive)
+    update={data:req.body.data,timeToLive:timeToLive}//this one i firs ttried to do using pre middleware bt there seems bug 
+    // in pre findOneAndUpdate middile
     console.log('cache exist- ',cacheExist)
     let query = {key: req.body.key};
     //upsert operation
-        Cache.findOneAndUpdate(query,update, {upsert: true}, function(err, doc) {
+        Cache.findOneAndUpdate(query,update, {upsert: true,useFindAndModify:false}, function(err, doc) {
             if (err)  res.send(500, {error: err});
             res.send({message:'Cache succesfully saved.'});
         });    
