@@ -4,11 +4,14 @@ cache implementation using mongoose
 How to Run-
 1. Install dependencies using npm i 
 2. To run express server- 
- i. DEV start using nodemon= npm run start \n
+<br/>
+ i. DEV start using nodemon= npm run start <br/>
  ii. PROD start using node js= npm run prodStart
+ <br/>
  
 How to test-
-POSTMAN collection is placed in repo.
+<br/>
+POSTMAN collection is placed in repo.<br/>
  
  MongoDB instance used details in app.js
  
