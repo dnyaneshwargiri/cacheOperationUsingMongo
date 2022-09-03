@@ -28,10 +28,9 @@ router.get('/:key', async(req,res) => {
             let currentTime=Date.now()
             let cacheTTL=Date.parse(cache[0]._doc.timeToLive)
             console.log("Cache TTL- ",cacheTTL ) 
-            console.log("Current TTL- ",currentTime) 
-            //console.log( cacheTTL < currentTime)           
+            console.log("Current TTL- ",currentTime)         
             //if cache is live
-            if(cacheTTL < currentTime)
+            if(cacheTTL > currentTime)
             {
                 res.json(cache)
                 console.log("Cache hit\n") 
