@@ -8,7 +8,7 @@ How to Run-
  i. DEV start using nodemon= npm run start <br/>
  ii. PROD start using node js= npm run prodStart
  <br/>
- 
+ <br/>
 How to test-
 <br/>
 POSTMAN collection is placed in repo.<br/>
